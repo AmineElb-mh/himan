@@ -456,10 +456,10 @@ button {
   position: relative;
   display: flex;
   align-items: flex-end;
-  /* Schermvullend op elk toestel. svh houdt rekening met de adresbalk op mobiel */
-  /* Hero + gele balk vullen samen precies het eerste scherm */
+  /* Hero + gele balk vullen samen precies het eerste scherm.
+     dvh volgt de echte zichtbare hoogte op mobiel (adresbalk in/uit) */
   min-height: calc(100vh - var(--banner-h));
-  min-height: calc(100svh - var(--banner-h));
+  min-height: calc(100dvh - var(--banner-h));
   padding: calc(var(--header-h) + 2rem) 0 3rem;
   overflow: hidden;
   isolation: isolate;
@@ -484,37 +484,61 @@ button {
 
 /* ---- Mobiel 'stack' (/v2): foto boven, tekst eronder ---- */
 @media (max-width: 47.99rem) {
+  /* Tekst neemt zijn natuurlijke hoogte, de foto vult de rest van het scherm */
   .hero--stack {
     flex-direction: column;
     align-items: stretch;
-    padding-top: 0;
+    padding: 0 0 1.75rem;
     background: var(--c-bg);
   }
   .hero--stack .hero__media {
     position: relative;
-    height: 52svh;
-    flex-shrink: 0;
+    flex: 1 1 0;
+    min-height: 11rem; /* vangnet voor zeer lage schermen */
+    height: auto;
     z-index: 0;
   }
-  /* Alleen bovenaan een donkere rand, zodat de header leesbaar blijft */
-  .hero--stack .hero__overlay {
-    bottom: auto;
-    height: 52svh;
-    z-index: 1;
-    background: linear-gradient(to bottom, rgba(23, 20, 15, 0.65), transparent 30%);
+  .hero--stack .hero__photo {
+    position: absolute;
+    inset: 0;
+    height: auto;
   }
-  .hero--stack .hero__overlay::after {
-    inset: auto 0 0 0;
+  /* Donkere rand boven (leesbare header) en zachte overgang onderaan */
+  .hero--stack .hero__media::before,
+  .hero--stack .hero__media::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .hero--stack .hero__media::before {
+    top: 0;
     height: 30%;
+    background: linear-gradient(to bottom, rgba(23, 20, 15, 0.65), transparent);
+  }
+  .hero--stack .hero__media::after {
+    bottom: 0;
+    height: 35%;
     background: linear-gradient(to bottom, transparent, var(--c-bg));
+  }
+  .hero--stack .hero__overlay {
+    display: none;
   }
   .hero--stack .hero__content {
     position: relative;
     z-index: 2;
-    margin-top: -2.5rem; /* tekst schuift een beetje over de foto */
+    margin-top: -2rem; /* tekst schuift een beetje over de foto */
   }
   .hero--stack .hero__title {
     margin-top: 0.75rem;
+  }
+  .hero--stack .hero__text {
+    margin-top: 1rem;
+  }
+  .hero--stack .hero__actions {
+    margin-top: 1.5rem;
   }
 }
 
@@ -526,17 +550,16 @@ button {
   .hero--split .hero__media {
     left: auto;
     /* Effen kleur loopt door tot net na de kop ("… IS"), daarna begint de foto */
-    width: calc(52% + 50px);
+    width: calc(52% + 90px); /* foto begint achter "IS" */
     /* Geleidelijke (ease-in) overgang, zodat er geen zichtbare rand ontstaat */
     --hero-fade: linear-gradient(
       to right,
       rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.04) 8%,
-      rgba(0, 0, 0, 0.14) 16%,
-      rgba(0, 0, 0, 0.32) 24%,
-      rgba(0, 0, 0, 0.56) 32%,
-      rgba(0, 0, 0, 0.82) 40%,
-      #000 48%
+      rgba(0, 0, 0, 0.08) 4%,
+      rgba(0, 0, 0, 0.25) 9%,
+      rgba(0, 0, 0, 0.5) 14%,
+      rgba(0, 0, 0, 0.78) 19%,
+      #000 25%
     );
     -webkit-mask-image: var(--hero-fade);
     mask-image: var(--hero-fade);
@@ -740,28 +763,40 @@ button {
   display: none;
 }
 
+.section--reviews {
+  padding-block: calc(var(--section-y) * 0.7);
+}
+.section--reviews .h2 {
+  font-size: clamp(2.2rem, 7vw, 3.75rem);
+}
+.section--reviews .section__head {
+  margin-bottom: 1.75rem;
+}
+
 .review {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  padding: 1.75rem;
+  gap: 0.9rem;
+  padding: 1.25rem 1.4rem;
   background: var(--c-bg-2);
   border-top: 3px solid var(--c-accent);
   scroll-snap-align: start;
 }
 .review blockquote {
   flex: 1;
-  font-size: 1.0625rem;
+  font-size: 0.975rem;
+  line-height: 1.55;
 }
 .review figcaption {
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--c-muted);
 }
 
 .stars {
   display: flex;
-  gap: 0.2rem;
-  font-size: 1.25rem;
+  gap: 0.15rem;
+  font-size: 1.05rem;
   line-height: 1;
   color: var(--c-line);
 }
@@ -870,26 +905,28 @@ button {
 }
 
 /* ---------- 14. Fotostrook ---------- */
-/* Mobiel: veegbare strook */
+/* Twee grote foto's, in het midden een smallere die lager staat */
+.strip-section {
+  padding-block: 1rem 3rem;
+  overflow: hidden; /* parallax mag niet buiten de sectie uitsteken */
+}
 .strip {
   display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 78%;
+  grid-template-columns: 1fr 0.8fr 1fr;
   gap: 0.5rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  padding-inline: var(--gutter);
+  align-items: start;
+  max-width: 68rem; /* iets kleiner dan de volle breedte */
 }
-.strip::-webkit-scrollbar {
-  display: none;
+.strip__item--mid {
+  margin-top: 1.5rem;
 }
-.strip__item {
+.strip__card {
   overflow: hidden;
-  scroll-snap-align: center;
+  border-radius: 8px;
+  isolation: isolate; /* afgeronde hoeken blijven scherp tijdens het zoomen */
 }
-.strip__item:hover .photo img {
-  transform: scale(1.05);
+.strip__card .photo {
+  border: 0;
 }
 
 /* ---------- 15. Instagram ---------- */
@@ -1053,10 +1090,13 @@ button {
     padding-inline: 0;
   }
   .strip {
-    grid-auto-flow: row;
-    grid-template-columns: repeat(3, 1fr);
-    overflow: visible;
-    padding-inline: 0;
+    gap: 1rem;
+  }
+  .strip__item--mid {
+    margin-top: 3rem;
+  }
+  .strip__card {
+    border-radius: 14px;
   }
 
   .insta-grid {
@@ -1113,8 +1153,10 @@ button {
   }
 
   .strip {
-    gap: 0.75rem;
-    padding-inline: 0.75rem;
+    gap: 1.25rem;
+  }
+  .strip-section {
+    padding-block: 1rem 4rem;
   }
 }
 

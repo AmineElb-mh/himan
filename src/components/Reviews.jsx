@@ -15,7 +15,7 @@ const Stars = ({ rating }) => (
 
 export default function Reviews() {
   return (
-    <section className="section" id="reviews" aria-labelledby="reviews-title">
+    <section className="section section--reviews" id="reviews" aria-labelledby="reviews-title">
       <div className="wrap">
         <Reveal className="section__head section__head--split">
           <div>
