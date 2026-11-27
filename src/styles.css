@@ -488,6 +488,11 @@ button {
 .hero__photo img {
   object-position: var(--hero-pos, center);
 }
+/* Gevelfoto iets helderder */
+.hero--split .hero__photo img,
+.hero--stack .hero__photo img {
+  filter: brightness(1.12) saturate(1.05);
+}
 
 /* ---- Mobiel 'stack' (/v2): foto boven, tekst eronder ---- */
 @media (max-width: 47.99rem) {
@@ -553,6 +558,10 @@ button {
 @media (min-width: 64rem) {
   .hero--split {
     background: var(--hero-sky, var(--c-bg));
+  }
+  /* De tekst staat op de effen kleur, dus de foto mag lichter */
+  .hero--split .hero__overlay {
+    background: rgba(23, 20, 15, 0.2);
   }
   .hero--split .hero__media {
     left: auto;
@@ -931,6 +940,7 @@ button {
   overflow: hidden;
   border-radius: 8px;
   isolation: isolate; /* afgeronde hoeken blijven scherp tijdens het zoomen */
+  will-change: transform, opacity; /* animatie op de GPU, vloeiender */
 }
 .strip__card .photo {
   border: 0;
