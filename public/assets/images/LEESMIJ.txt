@@ -1,0 +1,10 @@
+Zet je eigen foto's in deze map met exact deze bestandsnamen.
+Zolang een bestand ontbreekt, toont de site een gelabelde plaatshouder.
+
+hero.jpg              Hero (liggend, min. 2000 px breed)
+strip-kebab.jpg       Fotostrook: kebabbroodje close-up (staand 4:5)
+strip-toog.jpg        Fotostrook: broodjes aan de toog (staand 4:5)
+strip-dessert.jpg     Fotostrook: cheesecake (staand 4:5)
+insta-1.jpg … insta-4.jpg   Instagram-raster (vierkant 1:1)
+og-image.jpg          Deelafbeelding voor sociale media (1200 x 630)
+menu/kebab-1.jpg …    Menu (4:3), naam = waarde van "image" in src/data/menu.js

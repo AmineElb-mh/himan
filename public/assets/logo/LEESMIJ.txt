@@ -1,0 +1,2 @@
+Zet hier het logobestand (bv. himan-logo.svg) en vul het pad in
+bij logoSrc in src/data/site.js: '/assets/logo/himan-logo.svg'.

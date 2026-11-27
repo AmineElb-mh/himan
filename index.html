@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="nl-BE">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HIMAN KEBAB · Kebab in Berchem, Antwerpen</title>
+    <meta
+      name="description"
+      content="HIMAN KEBAB in de Driekoningenstraat 87, Berchem (Antwerpen). Bekijk ons menu, check de openingsuren en vind de weg. Something legendary is spinning in Antwerp."
+    />
+    <meta name="theme-color" content="#17140f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="nl_BE" />
+    <meta property="og:site_name" content="HIMAN KEBAB" />
+    <meta property="og:title" content="HIMAN KEBAB · Something legendary is spinning in Antwerp" />
+    <meta
+      property="og:description"
+      content="Kebabzaak in Berchem, Antwerpen. Menu, openingsuren en route."
+    />
+    <!-- Vervang door een absolute URL zodra de site online staat -->
+    <meta property="og:image" content="/assets/images/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Lettertypes: Anton (koppen) en Inter (tekst) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Gestructureerde data voor Google (LocalBusiness → Restaurant) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "HIMAN KEBAB",
+        "slogan": "Something legendary is spinning",
+        "servesCuisine": "Kebab",
+        "image": "/assets/images/og-image.jpg",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Driekoningenstraat 87",
+          "addressLocality": "Berchem, Antwerpen",
+          "postalCode": "2600",
+          "addressCountry": "BE"
+        },
+        "sameAs": ["https://www.instagram.com/himankebab/"],
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+            "opens": "12:00",
+            "closes": "22:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Friday", "Saturday"],
+            "opens": "12:00",
+            "closes": "23:59"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Sunday",
+            "opens": "15:00",
+            "closes": "22:00"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      HIMAN KEBAB · Driekoningenstraat 87, Berchem (Antwerpen). Ma–do 12:00–22:00, vr en za
+      12:00–00:00, zo 15:00–22:00.
+    </noscript>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
