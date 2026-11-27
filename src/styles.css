@@ -557,6 +557,17 @@ button {
 }
 
 /* ---------- 11. Menu ---------- */
+/* Melding zolang het menu tijdelijk is */
+.menu-note {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--c-ink);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--c-ink);
+}
+
 .tabs {
   display: flex;
   gap: 0.5rem;

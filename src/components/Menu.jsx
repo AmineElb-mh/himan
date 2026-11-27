@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import Reveal from './Reveal.jsx';
 import Photo from './Photo.jsx';
-import { categories, menuItems } from '../data/menu.js';
+import { categories, menuItems, MENU_IS_TEMPORARY } from '../data/menu.js';
 
 export default function Menu() {
   const [active, setActive] = useState(categories[0].id);
@@ -35,6 +35,9 @@ export default function Menu() {
           <p className="section__intro">
             Kies een categorie. Bestellen doe je gewoon aan de toog.
           </p>
+          {MENU_IS_TEMPORARY && (
+            <p className="menu-note">Voorlopig menu · aanbod en prijzen onder voorbehoud</p>
+          )}
         </Reveal>
 
         <Reveal delay={0.1}>

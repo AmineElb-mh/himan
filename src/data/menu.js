@@ -1,5 +1,5 @@
 /**
- * Menudata. Vul hier de echte gerechten, beschrijvingen en prijzen in.
+ * Menudata: gerechten, beschrijvingen, prijzen en foto's.
  * - category: moet overeenkomen met een id uit `categories`
  * - image: bestandsnaam in public/assets/images/ (bv. 'menu/kebab-1.jpg')
  * Voeg gerust items toe of verwijder er; de site past zich automatisch aan.
@@ -28,31 +28,40 @@ const photoAlt = {
   'dranken-3': 'Flesje frisdrank in de hand',
 };
 
-const placeholder = (category, n) => ({
+/**
+ * TIJDELIJK MENU
+ * HIMAN heeft nog geen eigen menu online. Onderstaande gerechten zijn algemene
+ * kebabzaak-gerechten met prijzen afgestemd op andere zaken in Berchem.
+ * Vervang ze door het echte HIMAN-menu zodra dat er is, en zet dan
+ * MENU_IS_TEMPORARY op false (verbergt de melding op de site).
+ */
+export const MENU_IS_TEMPORARY = true;
+
+const item = (category, n, name, description, price) => ({
   id: `${category}-${n}`,
   category,
-  name: '[Gerecht]',
-  description: '[Korte beschrijving]',
-  price: '[Prijs]',
+  name,
+  description,
+  price,
   image: `menu/${category}-${n}.jpg`,
   alt: photoAlt[`${category}-${n}`] ?? '',
 });
 
 export const menuItems = [
   // Kebab
-  placeholder('kebab', 1),
-  placeholder('kebab', 2),
-  placeholder('kebab', 3),
+  item('kebab', 1, 'Broodje kebab', 'Pitabroodje met kebab, verse groenten en saus naar keuze.', '€ 7,90'),
+  item('kebab', 2, 'Broodje kebab special', 'Extra gevuld broodje kebab met groenten en saus naar keuze.', '€ 10,00'),
+  item('kebab', 3, 'Broodje mix', 'Pitabroodje met een mix van vlees, groenten en saus naar keuze.', '€ 10,00'),
   // Durum
-  placeholder('durum', 1),
-  placeholder('durum', 2),
-  placeholder('durum', 3),
+  item('durum', 1, 'Durum kebab', 'Opgerold dun brood met kebab, groenten en saus naar keuze.', '€ 7,90'),
+  item('durum', 2, 'Durum kebab special', 'Extra gevulde durum met kebab, groenten en saus naar keuze.', '€ 10,00'),
+  item('durum', 3, 'Durum mix', 'Durum met een mix van vlees, groenten en saus naar keuze.', '€ 10,00'),
   // Frieten
-  placeholder('frieten', 1),
-  placeholder('frieten', 2),
-  placeholder('frieten', 3),
+  item('frieten', 1, 'Kleine friet', 'Saus erbij: € 0,80 per potje.', '€ 3,60'),
+  item('frieten', 2, 'Medium friet', 'Saus erbij: € 0,80 per potje.', '€ 4,90'),
+  item('frieten', 3, 'Grote friet', 'Saus erbij: € 0,80 per potje.', '€ 6,00'),
   // Dranken
-  placeholder('dranken', 1),
-  placeholder('dranken', 2),
-  placeholder('dranken', 3),
+  item('dranken', 1, 'Cola / cola zero', 'Blikje, koud uit de frigo.', '€ 1,90'),
+  item('dranken', 2, 'Fanta, Sprite of ice tea', 'Blikje, koud uit de frigo.', '€ 1,90'),
+  item('dranken', 3, 'Ayran of water', 'Plat of bruisend water.', '€ 1,80'),
 ];
