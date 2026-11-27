@@ -13,39 +13,29 @@ const item = {
 
 /**
  * Hero-varianten om te vergelijken:
- *   / en /v2 → gevel rechts, merkkleur links (desktop) · foto boven, tekst onder (mobiel)
- *   /v3  → geen foto, effen achtergrondkleur
- *   /v4  → dönerbroodje in de zaak als volledige achtergrond
+ *   /    → gevel rechts, merkkleur links (desktop) · foto boven, tekst onder (mobiel)
+ *   /v2  → geen foto, effen achtergrondkleur
  *
  * Opties per variant:
  *   split  true  = op desktop staat de foto rechts en loopt ze links over in `sky`
  *   stack  true  = op mobiel staat de foto boven en de tekst eronder
  *   sky          = kleur links naast de foto
  */
-const gevel = {
-  src: 'hero.jpg',
-  alt: 'Gevel van HIMAN Berliner döner kebab in de Driekoningenstraat',
-  label: 'Hero-foto: gevel van de zaak',
-  position: 'center 42%',
-  split: true,
-  stack: true,
-  sky: '#17140f', // merkkleur zwart-bruin
-};
-
 const HERO_VARIANTS = {
-  v1: gevel,
-  v2: gevel,
-  v3: null,
-  v4: {
-    src: 'hero-v2.jpg',
-    alt: 'Dönerbroodje met groenten en maïs in een HIMAN-houder, in de zaak',
-    label: 'Hero-foto: dönerbroodje in de zaak',
-    position: 'center 65%',
+  v1: {
+    src: 'hero.jpg',
+    alt: 'Gevel van HIMAN Berliner döner kebab in de Driekoningenstraat',
+    label: 'Hero-foto: gevel van de zaak',
+    position: 'center 42%',
+    split: true,
+    stack: true,
+    sky: '#17140f', // merkkleur zwart-bruin
   },
+  v2: null,
 };
 
 export default function Hero({ variant = 'v1' }) {
-  // v3 is bewust null (geen foto); onbekende varianten vallen terug op v1
+  // v2 is bewust null (geen foto); onbekende varianten vallen terug op v1
   const photo = variant in HERO_VARIANTS ? HERO_VARIANTS[variant] : HERO_VARIANTS.v1;
   const ref = useRef(null);
   // Subtiel parallax-effect op de achtergrondfoto
@@ -102,7 +92,8 @@ export default function Hero({ variant = 'v1' }) {
         </motion.p>
         <motion.div className="hero__actions" variants={item}>
           <a href="#menu" className="btn btn--solid">
-            Bekijk menu
+            {/* Op mobiel kort: "Menu" */}
+            <span className="hide-mobile">Bekijk&nbsp;</span>menu
           </a>
           <a href="#openingsuren" className="btn btn--ghost">
             Openingsuren

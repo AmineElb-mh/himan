@@ -25,7 +25,7 @@ const photoAlt = {
   'frieten-3': 'Frietjes met sauzen',
   'dranken-1': 'Frisdrank met ijsblokjes',
   'dranken-2': 'Glas cola met ijs',
-  'dranken-3': 'Flesje frisdrank in de hand',
+  'dranken-3': 'Glas ayran met een blaadje munt',
 };
 
 /**
@@ -35,7 +35,7 @@ const photoAlt = {
  * Vervang ze door het echte HIMAN-menu zodra dat er is, en zet dan
  * MENU_IS_TEMPORARY op false (verbergt de melding op de site).
  */
-export const MENU_IS_TEMPORARY = true;
+export const MENU_IS_TEMPORARY = false;
 
 const item = (category, n, name, description, price) => ({
   id: `${category}-${n}`,

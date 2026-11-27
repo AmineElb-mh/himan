@@ -103,6 +103,13 @@ button {
   border: 0;
 }
 
+/* Alleen tonen vanaf tablet */
+@media (max-width: 47.99rem) {
+  .hide-mobile {
+    display: none;
+  }
+}
+
 .skip-link {
   position: absolute;
   left: 1rem;
@@ -569,7 +576,7 @@ button {
   }
 }
 
-/* /v3: geen foto, effen achtergrond */
+/* /v2: geen foto, effen achtergrond */
 .hero--plain {
   background: var(--c-bg);
 }
@@ -756,8 +763,8 @@ button {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  margin-inline: calc(var(--gutter) * -1);
-  padding: 0.5rem var(--gutter) 1rem;
+  /* Zelfde zijmarge als de header en de koppen */
+  padding: 0.5rem 0 1rem;
 }
 .reviews::-webkit-scrollbar {
   display: none;

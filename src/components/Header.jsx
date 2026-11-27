@@ -101,7 +101,7 @@ export default function Header() {
               ))}
             </motion.ul>
             <a href="#menu" className="btn btn--solid mobile-menu__cta" onClick={() => setOpen(false)}>
-              Bekijk menu
+              Menu
             </a>
             <p className="mobile-menu__address">
               {site.street}
