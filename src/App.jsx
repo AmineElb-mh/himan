@@ -10,11 +10,12 @@ import Instagram from './components/Instagram.jsx';
 import Location from './components/Location.jsx';
 import Footer from './components/Footer.jsx';
 
-// Tijdelijke vergelijking van hero-varianten via /v2 en /v3
+// Tijdelijke vergelijking van hero-varianten via /v2, /v3 en /v4
 const heroVariant = (() => {
   const path = window.location.pathname.replace(/\/+$/, '');
   if (path === '/v2') return 'v2';
   if (path === '/v3') return 'v3';
+  if (path === '/v4') return 'v4';
   return 'v1';
 })();
 

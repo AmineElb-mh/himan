@@ -13,24 +13,35 @@ const item = {
 
 /**
  * Hero-varianten om te vergelijken:
- *   /    → gevel van de zaak
- *   /v2  → dönerbroodje in de zaak
+ *   / en /v2 → gevel rechts, merkkleur links (desktop) · foto boven, tekst onder (mobiel)
  *   /v3  → geen foto, effen achtergrondkleur
+ *   /v4  → dönerbroodje in de zaak als volledige achtergrond
+ *
+ * Opties per variant:
+ *   split  true  = op desktop staat de foto rechts en loopt ze links over in `sky`
+ *   stack  true  = op mobiel staat de foto boven en de tekst eronder
+ *   sky          = kleur links naast de foto
  */
+const gevel = {
+  src: 'hero.jpg',
+  alt: 'Gevel van HIMAN Berliner döner kebab in de Driekoningenstraat',
+  label: 'Hero-foto: gevel van de zaak',
+  position: 'center 42%',
+  split: true,
+  stack: true,
+  sky: '#17140f', // merkkleur zwart-bruin
+};
+
 const HERO_VARIANTS = {
-  v1: {
-    src: 'hero.jpg',
-    alt: 'Gevel van HIMAN Berliner döner kebab in de Driekoningenstraat',
-    label: 'Hero-foto: gevel van de zaak',
-    position: 'center 42%',
-  },
-  v2: {
+  v1: gevel,
+  v2: gevel,
+  v3: null,
+  v4: {
     src: 'hero-v2.jpg',
     alt: 'Dönerbroodje met groenten en maïs in een HIMAN-houder, in de zaak',
     label: 'Hero-foto: dönerbroodje in de zaak',
     position: 'center 65%',
   },
-  v3: null,
 };
 
 export default function Hero({ variant = 'v1' }) {
@@ -43,7 +54,15 @@ export default function Hero({ variant = 'v1' }) {
 
   return (
     <section
-      className={`hero ${photo ? '' : 'hero--plain'}`}
+      className={[
+        'hero',
+        !photo && 'hero--plain',
+        photo?.split && 'hero--split',
+        photo?.stack && 'hero--stack',
+      ]
+        .filter(Boolean)
+        .join(' ')}
+      style={photo?.sky ? { '--hero-sky': photo.sky } : undefined}
       id="top"
       ref={ref}
       aria-labelledby="hero-title"

@@ -482,6 +482,70 @@ button {
   object-position: var(--hero-pos, center);
 }
 
+/* ---- Mobiel 'stack' (/v2): foto boven, tekst eronder ---- */
+@media (max-width: 47.99rem) {
+  .hero--stack {
+    flex-direction: column;
+    align-items: stretch;
+    padding-top: 0;
+    background: var(--c-bg);
+  }
+  .hero--stack .hero__media {
+    position: relative;
+    height: 52svh;
+    flex-shrink: 0;
+    z-index: 0;
+  }
+  /* Alleen bovenaan een donkere rand, zodat de header leesbaar blijft */
+  .hero--stack .hero__overlay {
+    bottom: auto;
+    height: 52svh;
+    z-index: 1;
+    background: linear-gradient(to bottom, rgba(23, 20, 15, 0.65), transparent 30%);
+  }
+  .hero--stack .hero__overlay::after {
+    inset: auto 0 0 0;
+    height: 30%;
+    background: linear-gradient(to bottom, transparent, var(--c-bg));
+  }
+  .hero--stack .hero__content {
+    position: relative;
+    z-index: 2;
+    margin-top: -2.5rem; /* tekst schuift een beetje over de foto */
+  }
+  .hero--stack .hero__title {
+    margin-top: 0.75rem;
+  }
+}
+
+/* ---- Desktop 'split' (/ en /v2): gevel rechts, merkkleur links ---- */
+@media (min-width: 64rem) {
+  .hero--split {
+    background: var(--hero-sky, var(--c-bg));
+  }
+  .hero--split .hero__media {
+    left: auto;
+    /* Effen kleur loopt door tot net na de kop ("… IS"), daarna begint de foto */
+    width: calc(52% + 50px);
+    /* Geleidelijke (ease-in) overgang, zodat er geen zichtbare rand ontstaat */
+    --hero-fade: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.04) 8%,
+      rgba(0, 0, 0, 0.14) 16%,
+      rgba(0, 0, 0, 0.32) 24%,
+      rgba(0, 0, 0, 0.56) 32%,
+      rgba(0, 0, 0, 0.82) 40%,
+      #000 48%
+    );
+    -webkit-mask-image: var(--hero-fade);
+    mask-image: var(--hero-fade);
+  }
+  .hero--split .hero__photo img {
+    object-position: center 40%;
+  }
+}
+
 /* /v3: geen foto, effen achtergrond */
 .hero--plain {
   background: var(--c-bg);
